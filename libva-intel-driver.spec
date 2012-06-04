@@ -1,8 +1,8 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.0.15
-Release:	4%{?dist}
+Version:	1.0.18
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
@@ -73,6 +73,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jun 04 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-1
+- Update to 1.0.18
+
 * Sat May 26 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.15-4
 - Introduce --with gen4asm
 
