@@ -2,7 +2,7 @@
 
 Name:		libva-intel-driver
 Version:	1.0.18
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
@@ -15,11 +15,7 @@ ExclusiveArch:	%{ix86} x86_64 ia64
 BuildRequires:	libtool
 
 %{?_with_gen4asm:BuildRequires: intel-gen4asm >= 1.2}
-%if 0%{?fedora} > 17 || 0%{?rhel} > 6
-BuildRequires: systemd-devel
-%else
-BuildRequires: libudev-devel
-%endif
+BuildRequires:  pkgconfig(libudev)
 BuildRequires:	libXext-devel
 BuildRequires:	libXfixes-devel
 BuildRequires:	libdrm-devel >= 2.4.23
@@ -77,8 +73,8 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Wed Jul 11 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-2
-- Switch to systemd-devel
+* Wed Jul 11 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-3
+- Switch to pkgconfig(libudev)
 
 * Mon Jun 04 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-1
 - Update to 1.0.18
