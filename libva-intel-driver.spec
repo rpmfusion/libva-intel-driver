@@ -1,7 +1,7 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.0.15
+Version:	1.0.18
 Release:	4%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
@@ -15,12 +15,12 @@ ExclusiveArch:	%{ix86} x86_64 ia64
 BuildRequires:	libtool
 
 %{?_with_gen4asm:BuildRequires: intel-gen4asm >= 1.2}
-BuildRequires:	libudev-devel
+BuildRequires:  pkgconfig(libudev)
 BuildRequires:	libXext-devel
 BuildRequires:	libXfixes-devel
 BuildRequires:	libdrm-devel >= 2.4.23
 BuildRequires:	libpciaccess-devel
-BuildRequires:	libva-devel >= 1.0.14
+BuildRequires:	libva-devel >= 1.0.16
 BuildRequires:	mesa-libGL-devel
 
 #Introduced in F-17
@@ -73,6 +73,15 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Aug 03 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-4
+- Update to final 1.0.18
+
+* Wed Jul 11 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-3
+- Switch to pkgconfig(libudev)
+
+* Mon Jun 04 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-1
+- Update to 1.0.18
+
 * Sat May 26 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.15-4
 - Introduce --with gen4asm
 
