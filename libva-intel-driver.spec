@@ -2,7 +2,7 @@
 
 Name:		libva-intel-driver
 Version:	1.0.18
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
@@ -20,7 +20,7 @@ BuildRequires:	libXext-devel
 BuildRequires:	libXfixes-devel
 BuildRequires:	libdrm-devel >= 2.4.23
 BuildRequires:	libpciaccess-devel
-BuildRequires:	libva-devel >= 1.0.14
+BuildRequires:	libva-devel >= 1.0.16
 BuildRequires:	mesa-libGL-devel
 
 #Introduced in F-17
@@ -73,6 +73,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Aug 03 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-4
+- Update to final 1.0.18
+
 * Wed Jul 11 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.18-3
 - Switch to pkgconfig(libudev)
 
