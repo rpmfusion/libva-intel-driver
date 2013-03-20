@@ -1,21 +1,20 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.0.19
+Version:	1.0.20
 Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
 URL:		http://freedesktop.org/wiki/Software/vaapi
-Source0:	http://cgit.freedesktop.org/vaapi/intel-driver/snapshot/intel-driver-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0:	http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}.tar.bz2
 
 ExclusiveArch:	%{ix86} x86_64 ia64
 
 BuildRequires:	libtool
 
 %{?_with_gen4asm:BuildRequires: intel-gen4asm >= 1.2}
-BuildRequires:  pkgconfig(libudev)
+BuildRequires:	pkgconfig(libudev)
 BuildRequires:	libXext-devel
 BuildRequires:	libXfixes-devel
 BuildRequires:	libdrm-devel >= 2.4.23
@@ -27,13 +26,14 @@ BuildRequires:	mesa-libGL-devel
 Provides:	libva-freeworld = %{version}-%{release}
 Obsoletes:	libva-freeworld < 1.0.15
 
+Requires:	mesa-dri-filesystem
 
 %description
 HW video decode support for Intel integrated graphics.
 
 
 %prep
-%setup -q -n intel-driver-%{version}
+%setup -q
 %{?_with_gen4asm:
 #Move pre-built (binary) asm code
 for f in src/shaders/vme/*.g?b ; do
@@ -51,7 +51,6 @@ autoreconf -vif
 make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot} INSTALL="install -p"
 find %{buildroot} -regex ".*\.la$" | xargs rm -f --
 
@@ -61,18 +60,16 @@ gendiff . .prebuilt
 }
 
 
-%clean
-rm -rf %{buildroot}
-
-
-
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS COPYING NEWS README
 %{_libdir}/dri/i965_drv_video.so
 
 
 %changelog
+* Wed Mar 20 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.0.20-1
+- Update to 1.0.20
+- Spec file clean-up
+
 * Fri Nov 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0.19-1
 - Update to 1.0.19
 
