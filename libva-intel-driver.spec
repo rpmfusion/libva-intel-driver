@@ -2,12 +2,13 @@
 
 Name:		libva-intel-driver
 Version:	1.2.2
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
 URL:		http://freedesktop.org/wiki/Software/vaapi
 Source0:	http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}.tar.bz2
+Patch0:         libva-1.2.2-backport.patch
 
 ExclusiveArch:	%{ix86} x86_64 ia64
 
@@ -34,6 +35,7 @@ HW video decode support for Intel integrated graphics.
 
 %prep
 %setup -q
+%patch0 -p1
 %{?_with_gen4asm:
 #Move pre-built (binary) asm code
 for f in src/shaders/vme/*.g?b ; do
@@ -66,6 +68,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Tue Mar 04 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.2.2-2
+- Backport patch - rhbz#3193
+
 * Mon Feb 17 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.2.2-1
 - Update to 1.2.2
 
