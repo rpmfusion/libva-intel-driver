@@ -2,7 +2,7 @@
 
 Name:		libva-intel-driver
 Version:	1.3.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
@@ -25,6 +25,7 @@ BuildRequires:	mesa-libEGL-devel
 %{!?_without_wayland:
 BuildRequires:  wayland-devel
 BuildRequires:  pkgconfig(wayland-client) >= 1
+BuildRequires:  pkgconfig(wayland-scanner) >= 1
 }
 
 
@@ -66,6 +67,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Sat Apr 12 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.3.0-2
+- Add missing wayland-scanner BR
+
 * Sat Apr 12 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.3.0-1
 - Update to 1.3.0
 
