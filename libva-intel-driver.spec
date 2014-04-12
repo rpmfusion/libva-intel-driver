@@ -1,18 +1,17 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.2.2
-Release:	2%{?dist}
+Version:	1.3.0
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
 URL:		http://freedesktop.org/wiki/Software/vaapi
 Source0:	http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}.tar.bz2
-Patch0:         libva-1.2.2-backport.patch
 
 ExclusiveArch:	%{ix86} x86_64 ia64
 
-BuildRequires:	libtool
+#BuildRequires:	libtool
 
 %{?_with_gen4asm:BuildRequires: intel-gen4asm >= 1.2}
 BuildRequires:	pkgconfig(libudev)
@@ -20,14 +19,14 @@ BuildRequires:	libXext-devel
 BuildRequires:	libXfixes-devel
 BuildRequires:	libdrm-devel >= 2.4.23
 BuildRequires:	libpciaccess-devel
-BuildRequires:	libva-devel >= 1.0.16
+BuildRequires:	libva-devel >= 1.3.0
 BuildRequires:	mesa-libGL-devel
+BuildRequires:	mesa-libEGL-devel
+%{!?_without_wayland:
+BuildRequires:  wayland-devel
+BuildRequires:  pkgconfig(wayland-client) >= 1
+}
 
-#Introduced in F-17
-Provides:	libva-freeworld = %{version}-%{release}
-Obsoletes:	libva-freeworld < 1.0.15
-
-Requires:	mesa-dri-filesystem
 
 %description
 HW video decode support for Intel integrated graphics.
@@ -35,7 +34,6 @@ HW video decode support for Intel integrated graphics.
 
 %prep
 %setup -q
-%patch0 -p1
 %{?_with_gen4asm:
 #Move pre-built (binary) asm code
 for f in src/shaders/vme/*.g?b ; do
@@ -48,7 +46,7 @@ done
 
 
 %build
-autoreconf -vif
+#autoreconf -vif
 %configure --disable-static
 make %{?_smp_mflags}
 
@@ -68,6 +66,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Sat Apr 12 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.3.0-1
+- Update to 1.3.0
+
 * Tue Mar 04 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.2.2-2
 - Backport patch - rhbz#3193
 
