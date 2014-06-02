@@ -13,7 +13,7 @@ ExclusiveArch:	%{ix86} x86_64 ia64
 
 #BuildRequires:	libtool
 
-%{?_with_gen4asm:BuildRequires: intel-gen4asm >= 1.2}
+%{?_with_gen4asm:BuildRequires: pkgconfig(intel-gen4asm)}
 BuildRequires:	pkgconfig(libudev)
 BuildRequires:	libXext-devel
 BuildRequires:	libXfixes-devel
