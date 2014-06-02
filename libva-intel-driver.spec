@@ -1,8 +1,8 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.3.0
-Release:	2%{?dist}
+Version:	1.3.1
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
@@ -67,6 +67,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Mon Jun 02 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.3.1-1
+- Update to 1.3.1
+
 * Sat Apr 12 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.3.0-2
 - Add missing wayland-scanner BR
 
