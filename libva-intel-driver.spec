@@ -1,8 +1,8 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.3.1
-Release:	2%{?dist}
+Version:	1.4.1
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
@@ -67,6 +67,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Tue Oct 28 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.4.1-1
+- Update to 1.4.1
+
 * Mon Sep 01 2014 Sérgio Basto <sergio@serjux.com> - 1.3.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
