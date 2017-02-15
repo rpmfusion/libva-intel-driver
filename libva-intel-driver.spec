@@ -2,12 +2,13 @@
 
 Name:		libva-intel-driver
 Version:	1.7.3
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
 URL:		http://freedesktop.org/wiki/Software/vaapi
 Source0:	http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}.tar.bz2
+Patch0:		libva-intel-driver-1.7.3-glvnd-fix.patch
 
 ExclusiveArch:	%{ix86} x86_64 ia64
 
@@ -34,7 +35,7 @@ HW video decode support for Intel integrated graphics.
 
 
 %prep
-%setup -q
+%autosetup -p1
 %{?_with_gen4asm:
 #Move pre-built (binary) asm code
 for f in src/shaders/vme/*.g?b ; do
@@ -62,11 +63,15 @@ gendiff . .prebuilt
 
 
 %files
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS NEWS README
+%license COPYING
 %{_libdir}/dri/i965_drv_video.so
 
 
 %changelog
+* Wed Feb 15 2017 Hans de Goede <j.w.r.degoede@gmail.com> - 1.7.3-2
+- Fix libva not working when using with libglvnd + wayland (rhbz#1422151)
+
 * Thu Nov 10 2016 Nicolas Chauvet <kwizart@gmail.com> - 1.7.3-1
 - Update to 1.7.3
 
