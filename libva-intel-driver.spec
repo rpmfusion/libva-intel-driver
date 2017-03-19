@@ -2,7 +2,7 @@
 
 Name:		libva-intel-driver
 Version:	1.7.3
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 Group:		System Environment/Libraries
 License:	MIT and EPL
@@ -69,6 +69,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Sun Mar 19 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.7.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Wed Feb 15 2017 Hans de Goede <j.w.r.degoede@gmail.com> - 1.7.3-2
 - Fix libva not working when using with libglvnd + wayland (rhbz#1422151)
 
