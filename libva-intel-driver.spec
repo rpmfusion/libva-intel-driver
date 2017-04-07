@@ -1,18 +1,19 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.7.3
-Release:	3%{?dist}
+Version:	1.8.0
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
-Group:		System Environment/Libraries
 License:	MIT and EPL
-URL:		http://freedesktop.org/wiki/Software/vaapi
-Source0:	http://www.freedesktop.org/software/vaapi/releases/%{name}/%{name}-%{version}.tar.bz2
-Patch0:		libva-intel-driver-1.7.3-glvnd-fix.patch
+URL:		https://01.org/linuxmedia
+Source0:	https://github.com/01org/intel-vaapi-driver/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 ExclusiveArch:	%{ix86} x86_64 ia64
 
-#BuildRequires:	libtool
+BuildRequires:	libtool
+
+#Renamed when moved to 01.org
+Provides: intel-vaapi-driver = %{version}-%{release}
 
 %{?_with_gen4asm:BuildRequires: pkgconfig(intel-gen4asm)}
 BuildRequires:	pkgconfig(libudev)
@@ -35,7 +36,7 @@ HW video decode support for Intel integrated graphics.
 
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n intel-vaapi-driver-%{version}
 %{?_with_gen4asm:
 #Move pre-built (binary) asm code
 for f in src/shaders/vme/*.g?b ; do
@@ -48,12 +49,12 @@ done
 
 
 %build
-#autoreconf -vif
+autoreconf -vif
 %configure --disable-static
-make %{?_smp_mflags}
+%make_build
 
 %install
-make install DESTDIR=%{buildroot} INSTALL="install -p"
+%make_install INSTALL="install -p"
 find %{buildroot} -regex ".*\.la$" | xargs rm -f --
 
 %{?_with_gen4asm:
@@ -69,6 +70,12 @@ gendiff . .prebuilt
 
 
 %changelog
+* Fri Apr 07 2017 Nicolas Chauvet <kwizart@gmail.com> - 1.8.0-1
+- Update to 1.8.0
+- Move to 01.org
+- Add Virtual Provides as the project change it's name
+- Drop Group
+
 * Sun Mar 19 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.7.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
