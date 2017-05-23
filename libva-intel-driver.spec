@@ -1,7 +1,7 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.8.1
+Version:	1.8.2
 Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
@@ -70,6 +70,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Tue May 23 2017 Nicolas Chauvet <kwizart@gmail.com> - 1.8.2-1
+- Update to 1.8.2
+
 * Tue Apr 18 2017 Nicolas Chauvet <kwizart@gmail.com> - 1.8.1-1
 - Update to 1.8.1
 
