@@ -2,7 +2,7 @@
 
 Name:		libva-intel-driver
 Version:	1.8.3
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://01.org/linuxmedia
@@ -50,7 +50,9 @@ done
 
 %build
 autoreconf -vif
-%configure --disable-static
+%configure --disable-static \
+  --enable-hybrid-codec
+
 %make_build
 
 %install
@@ -70,6 +72,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Tue Aug 22 2017 Nicolas Chauvet <kwizart@gmail.com> - 1.8.3-2
+- Enable hybrid codec - rhbz#1475962
+
 * Wed Jul 12 2017 Nicolas Chauvet <kwizart@gmail.com> - 1.8.3-1
 - Update to 1.8.3
 
