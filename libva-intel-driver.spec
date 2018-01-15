@@ -1,16 +1,17 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	1.8.3
-Release:	2%{?dist}
+Version:	2.0.0
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://01.org/linuxmedia
 Source0:	https://github.com/01org/intel-vaapi-driver/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-ExclusiveArch:	%{ix86} x86_64 ia64
+ExclusiveArch:	%{ix86} x86_64
 
 BuildRequires:	libtool
+BuildRequires:	python2
 
 #Renamed when moved to 01.org
 Provides: intel-vaapi-driver = %{version}-%{release}
@@ -21,7 +22,7 @@ BuildRequires:	libXext-devel
 BuildRequires:	libXfixes-devel
 BuildRequires:	libdrm-devel >= 2.4.23
 BuildRequires:	libpciaccess-devel
-BuildRequires:  pkgconfig(libva) >= 0.39.4
+BuildRequires:  pkgconfig(libva) >= 1.0.0
 BuildRequires:	mesa-libGL-devel
 BuildRequires:	mesa-libEGL-devel
 %{!?_without_wayland:
@@ -72,6 +73,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Mon Jan 15 2018 Nicolas Chauvet <kwizart@gmail.com> - 2.0.0-1
+- Update to 2.0.0
+
 * Tue Aug 22 2017 Nicolas Chauvet <kwizart@gmail.com> - 1.8.3-2
 - Enable hybrid codec - rhbz#1475962
 
