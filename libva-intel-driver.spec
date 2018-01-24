@@ -1,12 +1,13 @@
-#global _with_gen4asm 1
+%global commit fcf9041b29cee938a228dc7950955ccebb43c6bf
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:		libva-intel-driver
 Version:	1.8.3
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://01.org/linuxmedia
-Source0:	https://github.com/01org/intel-vaapi-driver/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:	https://github.com/01org/intel-vaapi-driver/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
 
 ExclusiveArch:	%{ix86} x86_64 ia64
 
@@ -36,7 +37,7 @@ HW video decode support for Intel integrated graphics.
 
 
 %prep
-%autosetup -p1 -n intel-vaapi-driver-%{version}
+%autosetup -p1 -n intel-vaapi-driver-%{commit}
 %{?_with_gen4asm:
 #Move pre-built (binary) asm code
 for f in src/shaders/vme/*.g?b ; do
@@ -72,6 +73,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Wed Jan 24 2018 Nicolas Chauvet <kwizart@gmail.com> - 1.8.3-3
+- Switch to github snapshot from 1.8x branch
+
 * Tue Aug 22 2017 Nicolas Chauvet <kwizart@gmail.com> - 1.8.3-2
 - Enable hybrid codec - rhbz#1475962
 
