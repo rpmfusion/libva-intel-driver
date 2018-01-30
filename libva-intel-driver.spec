@@ -25,7 +25,7 @@ BuildRequires:	libpciaccess-devel
 BuildRequires:  pkgconfig(libva) >= 0.39.4
 BuildRequires:	mesa-libGL-devel
 BuildRequires:	mesa-libEGL-devel
-%{!?_without_wayland:
+%{?_with_wayland:
 BuildRequires:  wayland-devel
 BuildRequires:  pkgconfig(wayland-client) >= 1
 BuildRequires:  pkgconfig(wayland-scanner) >= 1
