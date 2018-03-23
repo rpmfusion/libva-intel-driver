@@ -2,16 +2,22 @@
 
 Name:		libva-intel-driver
 Version:	2.1.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://01.org/linuxmedia
 Source0:	https://github.com/intel/intel-vaapi-driver/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1:	intel-vaapi-driver.metainfo.xml
+Source9:	parse-intel-vaapi-driver.py
 
 ExclusiveArch:	%{ix86} x86_64
 
 BuildRequires:	libtool
 BuildRequires:	python2
+%if 0%{?fedora} >= 28
+# AppStream metadata generation
+BuildRequires:  libappstream-glib >= 0.6.3
+%endif
 
 #Renamed when moved to 01.org
 Provides: intel-vaapi-driver = %{version}-%{release}
@@ -65,14 +71,26 @@ find %{buildroot} -regex ".*\.la$" | xargs rm -f --
 gendiff . .prebuilt
 }
 
+%if 0%{?fedora} >= 28
+# install AppData and add modalias provides
+mkdir -p %{buildroot}%{_datadir}/appdata/
+install -pm 0644 %{SOURCE1} %{buildroot}%{_datadir}/appdata/
+fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
+%{SOURCE9} src/i965_pciids.h | xargs appstream-util add-provide ${fn} modalias
+%endif
+
 
 %files
 %doc AUTHORS NEWS README
 %license COPYING
 %{_libdir}/dri/i965_drv_video.so
+%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Fri Mar 23 2018 Nicolas Chauvet <kwizart@gmail.com> - 2.1.0-2
+- Add appstream support
+
 * Mon Feb 12 2018 Nicolas Chauvet <kwizart@gmail.com> - 2.1.0-1
 - Update to 2.1.0
 
