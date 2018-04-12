@@ -3,7 +3,7 @@
 
 Name:		libva-intel-driver
 Version:	1.8.3
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://01.org/linuxmedia
@@ -73,6 +73,9 @@ gendiff . .prebuilt
 
 
 %changelog
+* Thu Apr 12 2018 Nicolas Chauvet <kwizart@gmail.com> - 1.8.3-4
+- Build for i686 (RHEL 7.5)
+
 * Wed Jan 24 2018 Nicolas Chauvet <kwizart@gmail.com> - 1.8.3-3
 - Switch to github snapshot from 1.8x branch
 
