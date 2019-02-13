@@ -10,6 +10,9 @@ Source0:	https://github.com/intel/intel-vaapi-driver/archive/%{version}.tar.gz#/
 Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
 
+# https://github.com/intel/intel-vaapi-driver/issues/419
+Patch0:		427.patch
+
 ExclusiveArch:	%{ix86} x86_64
 
 BuildRequires:	libtool
@@ -90,6 +93,7 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 %changelog
 * Wed Feb 13 2019 Pete Walter <pwalter@fedoraproject.org> - 2.3.0-1
 - Update to 2.3.0
+- Backport a patch to fix compatibility with mesa 18.3 in F29
 
 * Thu Oct 11 2018 Nicolas Chauvet <kwizart@gmail.com> - 2.2.0-3
 - Rebuilt for libva update
