@@ -17,10 +17,8 @@ ExclusiveArch:	%{ix86} x86_64
 
 BuildRequires:	libtool
 BuildRequires:	python2
-%if 0%{?fedora} >= 28
 # AppStream metadata generation
 BuildRequires:  libappstream-glib >= 0.6.3
-%endif
 
 #Renamed when moved to 01.org
 Provides: intel-vaapi-driver = %{version}-%{release}
@@ -74,13 +72,11 @@ find %{buildroot} -regex ".*\.la$" | xargs rm -f --
 gendiff . .prebuilt
 }
 
-%if 0%{?fedora} >= 28
 # install AppData and add modalias provides
 mkdir -p %{buildroot}%{_datadir}/appdata/
 install -pm 0644 %{SOURCE1} %{buildroot}%{_datadir}/appdata/
 fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 %{SOURCE9} src/i965_pciids.h | xargs appstream-util add-provide ${fn} modalias
-%endif
 
 
 %files
