@@ -1,8 +1,8 @@
 #global _with_gen4asm 1
 
 Name:		libva-intel-driver
-Version:	2.3.0
-Release:	3%{?dist}
+Version:	2.1.0
+Release:	4%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://01.org/linuxmediag
@@ -91,25 +91,13 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
-* Mon Mar 04 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.0-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+* Fri Jun 07 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.1.0-4
+- Rebuilt for el8
 
-* Wed Feb 13 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.3.0-2
+* Wed Feb 13 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.1.0-3
 - Fix https://github.com/intel/intel-vaapi-driver/issues/419
   Backport a patch to fix compatibility with mesa 18.3 in F29
   Sent by Pete Walter <pwalter@fedoraproject.org>
-
-* Sat Jan 26 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.3.0-1
-- Update to 2.3.0
-
-* Thu Oct 11 2018 Nicolas Chauvet <kwizart@gmail.com> - 2.2.0-3
-- Rebuilt for libva update
-
-* Thu Jul 26 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.2.0-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
-
-* Fri Jul 13 2018 Nicolas Chauvet <kwizart@gmail.com> - 2.2.0-1
-- Update to 2.2.0
 
 * Fri Mar 23 2018 Nicolas Chauvet <kwizart@gmail.com> - 2.1.0-2
 - Add appstream support
