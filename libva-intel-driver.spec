@@ -11,7 +11,7 @@ Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
 
 # https://github.com/intel/intel-vaapi-driver/issues/419
-Patch0:		427.patch
+#Patch0:		427.patch
 
 ExclusiveArch:	%{ix86} x86_64
 
