@@ -1,8 +1,11 @@
 #global _with_gen4asm 1
+%if 0%{?rhel}
+%global _without_wayland 1
+%endif
 
 Name:		libva-intel-driver
 Version:	2.3.0
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://01.org/linuxmediag
@@ -16,28 +19,25 @@ Patch0:		427.patch
 ExclusiveArch:	%{ix86} x86_64
 
 BuildRequires:	libtool
+BuildRequires:  gcc
 BuildRequires:	python2
-%if 0%{?fedora} >= 28
 # AppStream metadata generation
 BuildRequires:  libappstream-glib >= 0.6.3
-%endif
 
 #Renamed when moved to 01.org
 Provides: intel-vaapi-driver = %{version}-%{release}
 
 %{?_with_gen4asm:BuildRequires: pkgconfig(intel-gen4asm)}
-BuildRequires:	pkgconfig(libudev)
-BuildRequires:	libXext-devel
-BuildRequires:	libXfixes-devel
-BuildRequires:	libdrm-devel >= 2.4.23
-BuildRequires:	libpciaccess-devel
-BuildRequires:  pkgconfig(libva) >= 1.0.0
-BuildRequires:	mesa-libGL-devel
-BuildRequires:	mesa-libEGL-devel
+BuildRequires:	systemd%{?_isa}
+BuildRequires:	libXext-devel%{?_isa}
+BuildRequires:	libXfixes-devel%{?_isa}
+BuildRequires:	libdrm-devel%{?_isa}
+BuildRequires:	libpciaccess-devel%{?_isa}
+BuildRequires:  libva-devel%{?_isa}
+BuildRequires:	libGL-devel%{?_isa}
+BuildRequires:	libEGL-devel%{?_isa}
 %{!?_without_wayland:
-BuildRequires:  wayland-devel
-BuildRequires:  pkgconfig(wayland-client) >= 1
-BuildRequires:  pkgconfig(wayland-scanner) >= 1
+BuildRequires:  wayland-devel%{?_isa}
 }
 
 
@@ -66,7 +66,7 @@ autoreconf -vif
 %make_build
 
 %install
-%make_install INSTALL="install -p"
+%make_install
 find %{buildroot} -regex ".*\.la$" | xargs rm -f --
 
 %{?_with_gen4asm:
@@ -74,13 +74,11 @@ find %{buildroot} -regex ".*\.la$" | xargs rm -f --
 gendiff . .prebuilt
 }
 
-%if 0%{?fedora} >= 28
 # install AppData and add modalias provides
 mkdir -p %{buildroot}%{_datadir}/appdata/
 install -pm 0644 %{SOURCE1} %{buildroot}%{_datadir}/appdata/
 fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 %{SOURCE9} src/i965_pciids.h | xargs appstream-util add-provide ${fn} modalias
-%endif
 
 
 %files
@@ -91,6 +89,9 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Mon Sep 23 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.3.0-5
+- Adapt for el8
+
 * Fri Aug 09 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
