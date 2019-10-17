@@ -28,7 +28,8 @@ BuildRequires:  libappstream-glib >= 0.6.3
 Provides: intel-vaapi-driver = %{version}-%{release}
 
 %{?_with_gen4asm:BuildRequires: pkgconfig(intel-gen4asm)}
-BuildRequires:	systemd%{?_isa}
+BuildRequires:	systemd
+BuildRequires:	glibc-devel%{?_isa}
 BuildRequires:	libXext-devel%{?_isa}
 BuildRequires:	libXfixes-devel%{?_isa}
 BuildRequires:	libdrm-devel%{?_isa}
