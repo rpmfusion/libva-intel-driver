@@ -8,8 +8,8 @@ Version:	2.4.0
 Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
-URL:		https://01.org/linuxmediag
-Source0:	https://github.com/intel/intel-vaapi-driver/releases/download/%{version}/intel-vaapi-driver-%{version}.tar.bz2
+URL:		https://github.com/intel/intel-vaapi-driver
+Source0:	%{url}/releases/download/%{version}/intel-vaapi-driver-%{version}.tar.bz2
 Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
 
@@ -41,6 +41,7 @@ BuildRequires:  wayland-devel%{?_isa}
 
 %description
 HW video decode support for Intel integrated graphics.
+https://01.org/intel-media-for-linux
 
 
 %prep
