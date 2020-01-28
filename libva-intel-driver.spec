@@ -1,5 +1,5 @@
 #global _with_gen4asm 1
-%if 0%{?rhel}
+%if 0%{?el7}
 %global _without_wayland 1
 %endif
 
