@@ -1,21 +1,22 @@
 #global _with_gen4asm 1
+%if 0%{?rhel}
+%global _without_wayland 1
+%endif
 
 Name:		libva-intel-driver
-Version:	2.1.0
-Release:	4%{?dist}
+Version:	2.4.0
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
-URL:		https://01.org/linuxmediag
-Source0:	https://github.com/intel/intel-vaapi-driver/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+URL:		https://github.com/intel/intel-vaapi-driver
+Source0:	%{url}/releases/download/%{version}/intel-vaapi-driver-%{version}.tar.bz2
 Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
-
-# https://github.com/intel/intel-vaapi-driver/issues/419
-#Patch0:		427.patch
 
 ExclusiveArch:	%{ix86} x86_64
 
 BuildRequires:	libtool
+BuildRequires:  gcc
 BuildRequires:	python2
 # AppStream metadata generation
 BuildRequires:  libappstream-glib >= 0.6.3
@@ -24,23 +25,23 @@ BuildRequires:  libappstream-glib >= 0.6.3
 Provides: intel-vaapi-driver = %{version}-%{release}
 
 %{?_with_gen4asm:BuildRequires: pkgconfig(intel-gen4asm)}
-BuildRequires:	pkgconfig(libudev)
-BuildRequires:	libXext-devel
-BuildRequires:	libXfixes-devel
-BuildRequires:	libdrm-devel >= 2.4.23
-BuildRequires:	libpciaccess-devel
-BuildRequires:  pkgconfig(libva) >= 1.0.0
-BuildRequires:	mesa-libGL-devel
-BuildRequires:	mesa-libEGL-devel
+BuildRequires:	systemd
+BuildRequires:	glibc-devel%{?_isa}
+BuildRequires:	libXext-devel%{?_isa}
+BuildRequires:	libXfixes-devel%{?_isa}
+BuildRequires:	libdrm-devel%{?_isa}
+BuildRequires:	libpciaccess-devel%{?_isa}
+BuildRequires:  libva-devel%{?_isa}
+BuildRequires:	libGL-devel%{?_isa}
+BuildRequires:	libEGL-devel%{?_isa}
 %{!?_without_wayland:
-BuildRequires:  wayland-devel
-BuildRequires:  pkgconfig(wayland-client) >= 1
-BuildRequires:  pkgconfig(wayland-scanner) >= 1
+BuildRequires:  wayland-devel%{?_isa}
 }
 
 
 %description
 HW video decode support for Intel integrated graphics.
+https://01.org/intel-media-for-linux
 
 
 %prep
@@ -64,7 +65,7 @@ autoreconf -vif
 %make_build
 
 %install
-%make_install INSTALL="install -p"
+%make_install
 find %{buildroot} -regex ".*\.la$" | xargs rm -f --
 
 %{?_with_gen4asm:
@@ -87,8 +88,17 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
-* Fri Jun 07 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.1.0-4
-- Rebuilt for el8
+* Fri Dec 06 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.4.0-1
+- Update to 2.4.0
+
+* Mon Sep 23 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.3.0-5
+- Adapt for el8
+
+* Fri Aug 09 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.0-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
+* Mon Mar 04 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.3.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
 * Wed Feb 13 2019 Nicolas Chauvet <kwizart@gmail.com> - 2.1.0-3
 - Fix https://github.com/intel/intel-vaapi-driver/issues/419
