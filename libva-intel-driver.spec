@@ -3,8 +3,6 @@
 %global _without_wayland 1
 %endif
 
-%define _legacy_common_support 1
-
 Name:		libva-intel-driver
 Version:	2.4.1
 Release:	1%{?dist}
