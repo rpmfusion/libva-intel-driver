@@ -6,8 +6,8 @@
 %define _legacy_common_support 1
 
 Name:		libva-intel-driver
-Version:	2.4.0
-Release:	3%{?dist}
+Version:	2.4.1
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://github.com/intel/intel-vaapi-driver
@@ -90,6 +90,9 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Mon Jun 08 2020 Nicolas Chauvet <kwizart@gmail.com> - 2.4.1-1
+- Update to 2.4.1
+
 * Tue Mar 10 2020 Nicolas Chauvet <kwizart@gmail.com> - 2.4.0-3
 - Define _legacy_common_support
 
