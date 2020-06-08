@@ -17,7 +17,7 @@ ExclusiveArch:	%{ix86} x86_64
 
 BuildRequires:	libtool
 BuildRequires:  gcc
-BuildRequires:	python2
+BuildRequires:	python3
 # AppStream metadata generation
 BuildRequires:  libappstream-glib >= 0.6.3
 
