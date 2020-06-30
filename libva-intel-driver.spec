@@ -22,7 +22,9 @@ BuildRequires:	python3
 BuildRequires:  libappstream-glib >= 0.6.3
 
 #Renamed when moved to 01.org
-Provides: intel-vaapi-driver = %{version}-%{release}
+Provides: intel-vaapi-driver = 1:%{version}-%{release}
+# Once again repo war! so it's on purpose
+Obsoletes: intel-vaapi-driver
 
 %{?_with_gen4asm:BuildRequires: pkgconfig(intel-gen4asm)}
 BuildRequires:	systemd
