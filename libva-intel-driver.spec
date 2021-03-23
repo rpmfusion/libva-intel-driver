@@ -5,13 +5,14 @@
 
 Name:		libva-intel-driver
 Version:	2.4.1
-Release:	2%{?dist}
+Release:	4%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://github.com/intel/intel-vaapi-driver
 Source0:	%{url}/releases/download/%{version}/intel-vaapi-driver-%{version}.tar.bz2
 Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
+Patch0: https://github.com/digetx/intel-vaapi-driver/commit/d03fd1f86a9aeee0b33447aee3578aadb3a93f8a.patch
 
 ExclusiveArch:	%{ix86} x86_64
 
@@ -90,6 +91,15 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Tue Mar 23 2021 Nicolas Chauvet <kwizart@gmail.com> - 2.4.1-4
+- Add patch from !530
+
+* Wed Feb 03 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.4.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
+* Tue Aug 18 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 2.4.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Tue Jun 30 2020 Nicolas Chauvet <kwizart@gmail.com> - 2.4.1-2
 - Bump
 
