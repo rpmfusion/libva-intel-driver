@@ -3,13 +3,17 @@
 %global _without_wayland 1
 %endif
 
+%global commit0 ab755cb7c4079a0884ede18b232341fe36affb8c
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global commitdate0 20221130
+
 Name:		libva-intel-driver
 Version:	2.4.1
-Release:	10%{?dist}
+Release:	11.%{commitdate0}git%{shortcommit0}%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://github.com/intel/intel-vaapi-driver
-Source0:	%{url}/releases/download/%{version}/intel-vaapi-driver-%{version}.tar.bz2
+Source0:	%{url}/archive/%{commit0}/intel-vaapi-driver-%{shortcommit0}.tar.gz
 Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
 Patch0: https://github.com/digetx/intel-vaapi-driver/commit/d03fd1f86a9aeee0b33447aee3578aadb3a93f8a.patch
@@ -49,7 +53,7 @@ https://01.org/intel-media-for-linux
 
 
 %prep
-%autosetup -p1 -n intel-vaapi-driver-%{version}
+%autosetup -p1 -n intel-vaapi-driver-%{commit0}
 %{?_with_gen4asm:
 #Move pre-built (binary) asm code
 for f in src/shaders/vme/*.g?b ; do
@@ -92,6 +96,9 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Mon Mar 13 2023 Nicolas Chauvet <kwizart@gmail.com> - 2.4.1-11.20221130gitab755cb
+- Update to 20221130
+
 * Mon Mar 13 2023 Nicolas Chauvet <kwizart@gmail.com> - 2.4.1-10
 - Add missing pciids
 
