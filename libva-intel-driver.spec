@@ -9,7 +9,7 @@
 
 Name:		libva-intel-driver
 Version:	2.4.1
-Release:	11.%{commitdate0}git%{shortcommit0}%{?dist}
+Release:	12.%{commitdate0}git%{shortcommit0}%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://github.com/intel/intel-vaapi-driver
@@ -96,6 +96,9 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Wed Mar 22 2023 Nicolas Chauvet <kwizart@gmail.com> - 2.4.1-12.20221130gitab755cb
+- rebuilt
+
 * Mon Mar 13 2023 Nicolas Chauvet <kwizart@gmail.com> - 2.4.1-11.20221130gitab755cb
 - Update to 20221130
 
