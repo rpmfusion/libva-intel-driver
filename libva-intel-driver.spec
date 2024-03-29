@@ -9,7 +9,7 @@
 
 Name:		libva-intel-driver
 Version:	2.4.1
-Release:	14.%{commitdate0}git%{shortcommit0}%{?dist}
+Release:	15.%{commitdate0}git%{shortcommit0}%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://github.com/intel/intel-vaapi-driver
@@ -18,6 +18,8 @@ Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
 Patch0: https://github.com/digetx/intel-vaapi-driver/commit/d03fd1f86a9aeee0b33447aee3578aadb3a93f8a.patch
 Patch1: https://github.com/intel/intel-vaapi-driver/pull/548.patch
+Patch2: https://github.com/intel/intel-vaapi-driver/pull/514.patch
+Patch3: https://github.com/intel/intel-vaapi-driver/pull/566.patch
 
 ExclusiveArch:	%{ix86} x86_64
 
@@ -96,6 +98,10 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Fri Mar 29 2024 Robert Mader <robert.mader@posteo.de> - 2.4.1-15.20221130gitab755cb
+- Add pull requests 514, fixing glitches, and 566, making the deprecated wl_drm
+  Wayland protocol optional.
+
 * Sat Feb 03 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.4.1-14.20221130gitab755cb
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
 
