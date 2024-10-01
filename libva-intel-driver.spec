@@ -8,42 +8,40 @@
 %global commitdate0 20221130
 
 Name:		libva-intel-driver
-Version:	2.4.1
-Release:	15.%{commitdate0}git%{shortcommit0}%{?dist}
+Version:	2.4.1^%{commitdate0}git%{shortcommit0}
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://github.com/intel/intel-vaapi-driver
 Source0:	%{url}/archive/%{commit0}/intel-vaapi-driver-%{shortcommit0}.tar.gz
 Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
-Patch0: https://github.com/digetx/intel-vaapi-driver/commit/d03fd1f86a9aeee0b33447aee3578aadb3a93f8a.patch
-Patch1: https://github.com/intel/intel-vaapi-driver/pull/548.patch
+Patch0:		https://github.com/digetx/intel-vaapi-driver/commit/d03fd1f86a9aeee0b33447aee3578aadb3a93f8a.patch
+Patch1:		https://github.com/intel/intel-vaapi-driver/pull/548.patch
 
 ExclusiveArch:	%{ix86} x86_64
 
 BuildRequires:	libtool
-BuildRequires:  gcc
+BuildRequires:	gcc
 BuildRequires:	python3
 # AppStream metadata generation
-BuildRequires:  libappstream-glib >= 0.6.3
+BuildRequires:	libappstream-glib >= 0.6.3
 
 #Renamed when moved to 01.org
-Provides: intel-vaapi-driver = 1:%{version}-%{release}
-# Once again repo war! so it's on purpose
-Obsoletes: intel-vaapi-driver
+Provides:	intel-vaapi-driver = %{version}-%{release}
 
-%{?_with_gen4asm:BuildRequires: pkgconfig(intel-gen4asm)}
+%{?_with_gen4asm:BuildRequires:	pkgconfig(intel-gen4asm)}
 BuildRequires:	systemd
 BuildRequires:	glibc-devel%{?_isa}
 BuildRequires:	libXext-devel%{?_isa}
 BuildRequires:	libXfixes-devel%{?_isa}
 BuildRequires:	libdrm-devel%{?_isa}
 BuildRequires:	libpciaccess-devel%{?_isa}
-BuildRequires:  libva-devel%{?_isa}
+BuildRequires:	libva-devel%{?_isa}
 BuildRequires:	libGL-devel%{?_isa}
 BuildRequires:	libEGL-devel%{?_isa}
 %{!?_without_wayland:
-BuildRequires:  wayland-devel%{?_isa}
+BuildRequires:	wayland-devel%{?_isa}
 }
 
 
@@ -96,6 +94,11 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Tue Oct 01 2024 Dominik Mierzejewski <dominik@greysector.net> - 2.4.1^20221130gitab755cb-1
+- switched to modern post-release versioning scheme
+- use tabs consistently
+- drop unnecessary Obsoletes
+
 * Fri Aug 02 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.4.1-15.20221130gitab755cb
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
