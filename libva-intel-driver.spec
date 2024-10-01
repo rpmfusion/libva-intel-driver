@@ -18,6 +18,8 @@ Source1:	intel-vaapi-driver.metainfo.xml
 Source9:	parse-intel-vaapi-driver.py
 Patch0:		https://github.com/digetx/intel-vaapi-driver/commit/d03fd1f86a9aeee0b33447aee3578aadb3a93f8a.patch
 Patch1:		https://github.com/intel/intel-vaapi-driver/pull/548.patch
+Patch2:		https://github.com/intel/intel-vaapi-driver/pull/514.patch
+Patch3:		https://github.com/intel/intel-vaapi-driver/pull/566.patch
 
 ExclusiveArch:	%{ix86} x86_64
 
@@ -98,6 +100,8 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 - switched to modern post-release versioning scheme
 - use tabs consistently
 - drop unnecessary Obsoletes
+- Add pull requests 514, fixing glitches, and 566, making the deprecated wl_drm
+  Wayland protocol optional. (rmader)
 
 * Fri Aug 02 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.4.1-15.20221130gitab755cb
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
