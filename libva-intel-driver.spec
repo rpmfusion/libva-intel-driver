@@ -3,13 +3,13 @@
 %global _without_wayland 1
 %endif
 
-%global commit0 ab755cb7c4079a0884ede18b232341fe36affb8c
+%global commit0 d30e01329344858f3c84d0ef9c2b68cbde37bb9a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global commitdate0 20221130
+%global commitdate0 20241027
 
 Name:		libva-intel-driver
 Version:	2.4.1^%{commitdate0}git%{shortcommit0}
-Release:	2%{?dist}
+Release:	1%{?dist}
 Summary:	HW video decode support for Intel integrated graphics
 License:	MIT and EPL
 URL:		https://github.com/intel/intel-vaapi-driver
@@ -19,7 +19,6 @@ Source9:	parse-intel-vaapi-driver.py
 Patch0:		https://github.com/digetx/intel-vaapi-driver/commit/d03fd1f86a9aeee0b33447aee3578aadb3a93f8a.patch
 Patch1:		https://github.com/intel/intel-vaapi-driver/pull/548.patch
 Patch2:		https://github.com/intel/intel-vaapi-driver/pull/514.patch
-Patch3:		https://github.com/intel/intel-vaapi-driver/pull/566.patch
 
 ExclusiveArch:	%{ix86} x86_64
 
@@ -96,6 +95,10 @@ fn=%{buildroot}%{_datadir}/appdata/intel-vaapi-driver.metainfo.xml
 
 
 %changelog
+* Sat Feb 01 2025 Dominik Mierzejewski <dominik@greysector.net> - 2.4.1^20241027gitd30e013-1
+- update to upstream commit d30e013
+- drop redundant patch
+
 * Tue Jan 28 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 2.4.1^20221130gitab755cb-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
 
